@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 总的struts入口 -->
+	<!-- <include file="xx.xml" /> -->
+	<!-- <result name="error">WebContent/WEB-INF/pages/global/error.jsp</result> -->
+	<package name="default" namespace="/"
+		extends="struts-default,tiles-default">
+		<!-- 默认结果集为Tiles 2 -->
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" default="true" />
+		</result-types>
+
+		<action name="cha-xun" class="com.vince.action.ChaXunAction">
+			<result name="success">vince.chaxun</result>
+		</action>
+	</package>
+
+	<!-- JSON -->
+	<package name="json" namespace="/json" extends="json-default">
+		<!-- 异步查询实验台预约信息 -->
+		<action name="json-cha-xun" class="com.vince.action.ChaXunAction"
+			method="loadJson">
+			<result type="json">
+				<param name="root">vacant</param>
+			</result>
+		</action>
+		<!-- 异步用户预约操作 -->
+		<action name="json-yu-yue" class="com.vince.action.YuYueAction">
+			<result type="json">
+
+				<param name="root">vacant</param>
+			</result>
+		</action>
+
+		<!-- 登录时用户盐值请求 -->
+		<action name="json-get-salt" class="com.vince.action.LoginAction"
+			method="getSalt">
+			<result type="json">
+				<param name="root">usersalt</param>
+			</result>
+		</action>
+
+		<!-- 用户登录时验证请求 -->
+		<action name="json-login" class="com.vince.action.LoginAction">
+			<result type="json">
+				<!-- <param name="root">vacant</param> -->
+			</result>
+		</action>
+	</package>
+</struts>
